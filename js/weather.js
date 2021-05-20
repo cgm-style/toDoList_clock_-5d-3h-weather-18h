@@ -2,7 +2,7 @@ const weather = document.querySelector(".js-weather");
 let weatherChk = 0;
 let chk_Number = weather.childNodes.length + 5;
 
-const API_KEY = 'c65eec58bb72eba4ba267415b3d37432';
+const API_KEY = 'your API_KEY';
 const COORDS = 'coords';
 
 
