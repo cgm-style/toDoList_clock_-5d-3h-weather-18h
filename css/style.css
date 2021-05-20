@@ -121,3 +121,9 @@ li  {
   text-shadow: 0 0 5px black;
   font-size: 2vw;
 }
+
+@media screen and (max-width: 768px) {
+  .js-weather {
+    display: block;
+  }
+}
