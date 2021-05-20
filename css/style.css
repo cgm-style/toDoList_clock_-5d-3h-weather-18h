@@ -10,7 +10,7 @@ li  {
     color: white;
     text-shadow: 0 0 10px black;
     font-size: 4vw;
-    margin-top: 12%;
+    margin-top: 10%;
 }
 
 .form,.greetings {
@@ -18,13 +18,17 @@ li  {
   }
 
 .js-toDoForm input  {
-  background: no-repeat;
+  background: rgba(0,0,0,0.2);
     border: 0px;
     border-bottom: 3px solid white;
     font-size: 2vh;
     padding: 8px;
     color: white;
     text-shadow: 0 0 5px black;
+    border-radius: 10px;
+}
+.js-toDoForm input::placeholder {
+  color:white;
 }
 
 .showing  {
@@ -45,8 +49,14 @@ li  {
 
 .js-toDoList li {
   text-align: initial;
-  width: 100px;
+  width: 200px;
   margin: 0 auto;
+  color: white;
+  text-shadow: 0 0 5px black;
+}
+
+.js-toDoList li span  {
+  padding-left:20px;
 }
 
 @keyframes fadeIn {
@@ -80,6 +90,23 @@ li  {
   border-radius: 10px;
   margin: 5px;
   line-height: 2.5vh;
+}
+
+.js-timeChk {
+  width: 100px;
+    text-align: center;
+    background: no-repeat;
+    border: 0px;
+    border-bottom: 2px solid white;
+    padding: 5px;
+    font-weight: bold;
+    font-size: 20px;
+    color: white;
+    text-shadow: 3px 3px black;
+}
+
+.js-timeChk option  {
+  background:black;
 }
 
 .js-weather div span{
