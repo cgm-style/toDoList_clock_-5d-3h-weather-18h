@@ -1,76 +1,130 @@
 const toDoForm = document.querySelector(".js-toDoForm"),
 	toDoInput = toDoForm.querySelector("input"),
-	toDoList = document.querySelector(".js-toDoList");
+	toDoList = document.querySelector(".js-toDoList"),
 	toDoEndList = document.querySelector(".js-toDoEndList");
 
-function saveTodo()	{
-	event.preventDefault();
-	const nowToDo = toDoInput.value;
-	console.log("ok");
+function saveTodo()	{	// saveTodo
+	event.preventDefault(); // 이벤트 막기
+	const nowToDo = toDoInput.value;	// input의 값을 저장
 }
 
-const TODOS_LS = 'toDos'
+let TODOS_LS = '';
 
-let toDos = [];
+let toDos = [];	// 빈 객체 생성
 
-function deletToDo(event)	{
-	const btn	=	event.target;
-	const li = btn.parentNode;
-	toDoList.removeChild(li);
+function deletToDo(event)	{		// X 버튼 누를시 이벤트
+	const btn	=	event.target;	// 이벤트가 발생한 객체를 선택
+	const li = btn.parentNode.parentNode;	//	그 객체의 부모의 부모를 찾아감.
+	console.dir(li);
 
-	const cleanToDos = toDos.filter(function(toDo){
-		return toDo.id !== parseInt(li.id);
+	if(li.parentNode.className === "js-toDoEndList")	{	// 찾아간 객체의 부모의 클래스 네임이 같을경우
+		toDoEndList.removeChild(li);	// toDoEndList 에서 객체를 삭제
+	}else	{	// 같지 않을 경우
+		toDoList.removeChild(li);	// toDolist 에서 삭제
+	}
+	
+
+	const cleanToDos = toDos.filter(function(toDo){	// 필터 추정function의 toDo값은 변수 toDos에서 걸래낸다
+		return toDo.id !== parseInt(li.id);	//	toDos의 객체 임의값의 ID가 li의 ID와 같을 경우 이것을 제외한 나머지 값을 리턴.
 	});
-	toDos = cleanToDos;
-	saveToDos();
+	toDos = cleanToDos;	// filter에 일치한 li 객체를 제외한 내용을 받음
+	saveToDos();	//위의 필터링 된것을 저장 결과적으로 삭제한것이 됨
+}
+
+function clearBtnToDo(event)	{	// v체크 표시를 눌렀을떄
+	const clearBtn = event.target,	// 이벤트가 발생한 객체
+		  clearBtnli = clearBtn.parentNode.parentNode,	// 해당 엘리먼트의 부모의 부모
+		  clickCheckId = clearBtnli.id;	// 엘리먼트의 id 키 
+
+		  toDoList.removeChild(clearBtnli);	// 우선 toDoList에서 체크표시한 객체를 삭제
+
+		let cleanToDos = toDos.filter(function(toDo){	// 필터 추정function의 toDo값은 변수 toDos에서 걸래낸다
+			return  toDo.id === parseInt(clickCheckId);	// toDo에서 id 중 선택한 엘리먼트키와 같은 id를 가진아이만 리턴
+		})
+
+		cleanToDos[0].clearOn = true;	// 위 필터에서 나온 id값이 같은 객체에 clearOn을 true로 추가
+
+		paintToDo(cleanToDos[0].text,cleanToDos[0].clearOn); //위의 모든 값을 텍스트,clear 여부,id값을 paintToDo로 보냄
+
+		let clearRemoveToDos = toDos.filter(function(toDo){	// 필터 추정function의 toDo값은 변수 toDos에서 걸래낸다
+			return toDo.clearOn !== true;	//	toDos의 모든 객체중 ClearOn이 아닌 객체만 리턴
+		});
+
+		toDos = clearRemoveToDos;	// 리턴받은 Clear이 false 없는 아이들만 toDos에 저장
+		saveToDos();	//위의 필터링 된것을 저장 결과적으로 삭제한것이 됨
+
 }
 
 function saveToDos() {
-	localStorage.setItem(TODOS_LS, JSON.stringify(toDos))
+	localStorage.setItem(TODOS_LS, JSON.stringify(toDos))	// 받아온 내용을 로컬스토리지에 저장
 }
 
-function paintToDo(text)	{
-	const li = document.createElement("li");
-	const delBtn = document.createElement("button");
-	const span = document.createElement("span");
-	const newId = toDos.length + 1;
-	delBtn.innerText = "X";
-	delBtn.addEventListener("click", deletToDo)
-	span.innerText = text;
-	li.appendChild(delBtn);
-	li.appendChild(span)
-	li.id = newId;
-	toDoList.appendChild(li);
+function paintToDo(text,clear)	{	// 텍스트,클리어여부,id값을 받아옴
+	const li = document.createElement("li");	// li 생성
+	const delBtn = document.createElement("button");	// button 생성
+	const span = document.createElement("span");	// span 생성
+	const newId = toDos.length + 1,	// 새로운 id생성 toDos의 객체 수 +1의 값
+		  clearBtn = document.createElement("button");	// button생성
 
-	const toDoObj = {
-		text : text,
-		id : newId
+	delBtn.innerHTML = "<i class='fas fa-times'></i>";	// x아이콘 생성
+	clearBtn.innerHTML= '<i class="fas fa-check"></i>';	// v체크 아이콘 생성
+
+	delBtn.addEventListener("click", deletToDo);	// x버튼 클릭시 이벤트
+	clearBtn.addEventListener("click", clearBtnToDo);	// v버튼 클릭시 이벤트
+
+	li.appendChild(delBtn);	// li에 삭제버튼 생성
+	li.appendChild(clearBtn);	// li에 체크버튼 생성
+	li.appendChild(span);	// li에 span 생성
+
+	span.innerText = text;	// span의 text 내용 
+	li.id = newId;	// li에 id 값 생성
+	delBtn.className = "delBtn";	// 삭제 버튼에 class 생성
+	clearBtn.className = "clearBtn";	// 체크 버튼에 class 생성
+
+	if(clear === false)	{	// clear가 아니라면
+		toDoList.appendChild(li);	// 해야할 리스트에 생성
+
+		const toDoObj = {	// 새로 생성되는 오브젝트
+			text : text,
+			id : newId,
+			clear : clear
+		}
+		toDos.push(toDoObj);	// 새로 생성된 오브젝트를 toDos에 추가
+		saveToDos();	// 바뀐 내용을 로컬스토리지에 저장
+	}else	{	// clear라면 
+		toDoEndList.appendChild(li);	// 클리어 리스트에 생성
+		clearBtn.remove();	// 클리어를 이미 했기에 클리어 버튼 삭제
+
+		const toDoObj = {	// 새로 생성되는 오브젝트
+			text : text,
+			id : newId,
+			clear : clear
+		}
+
+		toDos.push(toDoObj);	// 새로 생성된 오브젝트를 toDos에 추가
+		saveToDos();	// 바뀐 내용을 로컬스토리지에 저장
 	}
-	toDos.push(toDoObj);
-	saveToDos();
 }
 
-function handleSubmut(event)	{
-	event.preventDefault();
-	const currentValue = toDoInput.value;
-	paintToDo(currentValue);
-	toDoInput.value = "";
+function handleSubmut(event)	{	// toDO input 타이핑 시
+	event.preventDefault();	// 이벤트를 막음 
+	const currentValue = toDoInput.value;	// input의 값을 저장
+	paintToDo(currentValue,false);	// 해당하는 내용을 paint에 저장
+	toDoInput.value = "";	// input 추가
 }
 
-function loadToDos()	{
-	const loadToDos = localStorage.getItem(TODOS_LS)
-	if(loadToDos !== null)	{
-		const parsedToDos = JSON.parse(loadToDos);
-		console.log(parsedToDos);
-		parsedToDos.forEach(function(toDo) {
-			paintToDo(toDo.text)
+function loadToDos()	{	// 저장된 것을 프린팅
+	const loadToDos = localStorage.getItem(TODOS_LS) // 로컬 스토리지에 저장된 내용 불러오기
+	if(loadToDos !== null)	{	// 로드된 값이 null(없는) 값이 아니라면
+		const parsedToDos = JSON.parse(loadToDos);	// 로컬스토리지에서 가져온값
+		parsedToDos.forEach(function(toDo) {	// 내용 찾기
+			paintToDo(toDo.text,toDo.clear);	// 텍스트와 클리어 여부를 찾은후 이것을 paintToDo로 보냄
 		})
 	}
 }
 
-function init()	{
-	loadToDos();
-	toDoForm.addEventListener("submit", handleSubmut)
+function init()	{	// 함수 실행
+	toDoForm.addEventListener("submit", handleSubmut);
 }
 
 init();
