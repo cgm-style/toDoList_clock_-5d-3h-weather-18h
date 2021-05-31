@@ -11,6 +11,7 @@ li  {
     text-shadow: 0 0 10px black;
     font-size: 4vw;
     margin-top: 10%;
+    z-index: 1;
 }
 
 .form,.greetings {
@@ -47,12 +48,28 @@ li  {
   padding:0px;
 }
 
-.js-toDoList li {
+.js-toDoList li,.js-toDoEndList li {
   text-align: initial;
   width: 200px;
-  margin: 0 auto;
+  margin: 6px auto;
   color: white;
   text-shadow: 0 0 5px black;
+}
+
+.js-toDoList li button,.js-toDoEndList li button  {
+  background: no-repeat;
+    border: 0px;
+    cursor: pointer;
+    transition: all 0.3s;
+}
+.js-toDoList li button:hover,.js-toDoEndList li button:hover  {
+  transform: scale(1.7);
+}
+.delBtn {
+  color: crimson;
+}
+.clearBtn {
+  color:palegreen
 }
 
 .js-toDoList li span  {
@@ -85,11 +102,12 @@ li  {
 }
 
 .js-weather div {
-  background: lightblue;
+  background: rgba(0,0,0,0.4);
   padding: 25px;
   border-radius: 10px;
   margin: 5px;
   line-height: 2.5vh;
+  color:white;
 }
 
 .js-timeChk {
@@ -103,6 +121,8 @@ li  {
     font-size: 20px;
     color: white;
     text-shadow: 3px 3px black;
+    margin: 0 auto;
+    display: block;
 }
 
 .js-timeChk option  {
@@ -122,8 +142,179 @@ li  {
   font-size: 2vw;
 }
 
+#tableBox {
+  background: rgba(0,0,0,0.5);
+    padding: 15px 15px;
+    border-radius: 10px;
+    position: fixed;
+    text-align: center;
+    top: 35px;
+    left: 0px;
+    box-shadow: 1px 1px 5px rgb(0 0 0 / 50%);
+    z-index: 0;
+    opacity: 0;
+    transition:all 0.3s ease-in-out;
+    cursor:default;
+}
+
+#tableBox td:hover  {
+  background-color:slategrey;
+}
+
+#prevBtn  {
+  position: absolute;
+  left: 10px;
+}
+#nextBtn  {
+  position: absolute;
+  right: 10px;
+}
+
+#tableTitle  {
+  color: white;
+    margin: 0px 0px 15px 0px;
+    position: relative;
+    display: flex;
+    padding: 5px;
+    background: rgba(255,255,255,0.15);
+    border-radius: 5px;
+}
+
+#jsTable thead  {
+  color:white;
+}
+
+#jsMonth  {
+  margin:0 auto;
+}
+
+#jsMonth select {
+  border: 0px;
+    background: no-repeat;
+    color: white;
+    font-size: 1vw;
+    border-bottom: 1px solid;
+}
+#jsMonth option {
+  background: black;
+}
+
+#calendarBtn  {
+  color: white;
+  font-size: 24px;
+  width: 200px;
+  height: 200px;
+  position: absolute;
+  top: -110px;
+  left: -110px;
+  background: #aa4b6b;  /* fallback for old browsers */
+background: -webkit-linear-gradient(to right, #3b8d99, #6b6b83, #aa4b6b);  /* Chrome 10-25, Safari 5.1-6 */
+background: linear-gradient(to right, #3b8d99, #6b6b83, #aa4b6b); /* W3C, IE 10+/ Edge, Firefox 16+, Chrome 26+, Opera 12+, Safari 7+ */
+
+
+  border-radius: 50%;
+  box-shadow: 0px 0px 0px rgb(0 0 0 / 80%);
+  transition:all 0.3s ease-in-out;
+  cursor: pointer;
+  z-index: 1;
+}
+#calendarBtn:hover  {
+  box-shadow: 2px 2px 5px rgb(0 0 0 / 80%);
+  left: -100px;
+  top: -100px;
+}
+#calendarBtn i  {
+  position: absolute;
+    right: 20%;
+    bottom: 20%;
+    transition: all 0.3s ease-in-out;
+    height: fit-content;
+}
+
+.calendarOn {
+  width: 300px !important;
+  left: 0px !important;
+    top: 0px !important;
+    border-radius: 0px 10px 10px 0px !important;
+    height: 43vh !important;
+    z-index: 0 !important;
+}
+
+.calendarOn i   {
+  right: 20px !important;
+  top: 20px;
+}
+
+.tableBoxOn {
+  z-index: 2 !important;
+  opacity: 1 !important;
+    top: 80px !important;
+    left: 50px !important;
+    cursor: pointer !important;
+}
+
+#calendarBox  {
+  width: 30%;
+    height: 60vh;
+    position: fixed;
+    left: 35%;
+    top: 23%;
+    background: rgba(255,255,255,1);
+    text-align: center;
+    border-radius: 30px;
+    opacity: 0;
+    transition:all 0.3s;
+}
+
+.calenderBoxOn  {
+  opacity: 1 !important;
+  top:20% !important;
+}
+
+#calendarBox p  {
+  font-size: 2vw;
+    margin: 20px;
+}
+#calendarBox hr {
+  height: 2px;
+    border: 0px;
+    background: black;
+    width: 6%;
+    margin-bottom: 20px;
+}
+
+#jsTodoBox  {
+  display: flex;
+  justify-content: center;
+  position: relative;
+  width: 95%;
+  height: 70%;
+  background: rgba(0,0,0,0.5);
+  border-radius: 20px;
+  margin: 0 auto;
+  border-radius: 30px;
+}
+#jsTodoBox ul{
+  width: 45%;
+  padding: 0px;
+  margin: 4% 1.5%;
+  background: rgba(255,255,255,0.3);
+  border-radius: 20px;
+}
+
 @media screen and (max-width: 768px) {
   .js-weather {
     display: block;
+  }
+
+  .calendarOn {
+    width: 100% !important;
+    height: 52vh !important;
+  }
+  .tableBoxOn{
+    left: 28% !important;
+  }
+  #jsMonth select {
+    font-size: 4vw;
   }
 }
