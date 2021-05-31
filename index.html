@@ -3,8 +3,9 @@
   <head>
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width">
-    <title>repl.it</title>
+    <title>toDo/Clock/Weather</title>
     <link href="css/style.css" rel="stylesheet" type="text/css" />
+    <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.14.0/css/all.css" integrity="sha384-HzLeBuhoNPvSl5KYnjx0BT+WB0QEEqLprO+NBkkk5gbc67FTaL7XIGa2w1L0Xbgc" crossorigin="anonymous">
   </head>
   <body>
     <div class="js-clock">
@@ -14,23 +15,72 @@
       <input class="js-input" type="text" placeholder="what is your name">
     </form>
     <h4 class="js-greetings greetings" ></h4>
-	<form class="js-toDoForm">
-		<input type="text" placeholder="write a to do">
-    <div><h3 style="color:white;">time zon</h3></div>
-    <select class="js-timeChk"></select>
-	</form>
-	<ul class="js-toDoList">
-	</ul>
-	<ul class="js-toDoEndList">
-		<li></li>
-	</ul>
+  <div><h3 style="color:white; text-align: center;">time zon</h3></div>
+  <select class="js-timeChk"></select>
   <div class="js-weather"></div>
   <div class="js_NowWeather"></div>
-	  
+  <div id="tableBox">
+    <div id="tableTitle">
+      <span id="prevBtn">&lt;</span>
+      <div id="jsMonth">
+          <form>
+            <select>
+              <option value="1" name="1">1</option>
+              <option value="2" name="2">2</option>
+              <option value="3" name="3">3</option>
+              <option value="4" name="4">4</option>
+              <option value="5" name="5">5</option>
+              <option value="6" name="6">6</option>
+              <option value="7" name="7">7</option>
+              <option value="8" name="8">8</option>
+              <option value="9" name="9">9</option>
+              <option value="10" name="10">10</option>
+              <option value="11" name="11">11</option>
+              <option value="12" name="12">12</option>
+            </select>
+          </form>
+      </div>
+      <span id="nextBtn">&gt;</span>
+    </div>
+    <table id="jsTable">
+      <thead>
+        <tr>
+          <td class="getday" style="color:crimson;">일</td>
+          <td class="getday">월</td>
+          <td class="getday">화</td>
+          <td class="getday">수</td>
+          <td class="getday">목</td>
+          <td class="getday">금</td>
+          <td class="getday" style="color:crimson;">토</td>
+        </tr>
+      </thead>
+      <tbody id="jsTbody">
+      </tbody>
+    </table>
+  </div>
+  <div id="calendarBtn">
+    <i class="fa fa-calendar" aria-hidden="true"></i>
+  </div>
+  <div id="calendarBox">
+    <p id="jsCalenderTitle">2021-05-28</p>
+    <hr>
+    <form class="js-toDoForm">
+      <input type="text" placeholder="write a to do">
+    </form>
+    <div id="jsTodoBox">
+      <ul class="js-toDoList">
+      </ul>
+      <ul class="js-toDoEndList">
+      </ul>
+    </div>
+  </div>
+
+
+    <script src="https://use.fontawesome.com/254c48192f.js"></script>
     <script src="js/bg.js"></script>
     <script src="js/clock.js"></script>
     <script src="js/script.js"></script>
-    <script src="js/todo.js"></script>
-    <script src="js/weather.js"></script>
+	  <script src="js/todo.js"></script>
+	  <script src="js/weather.js"></script>
   </body>
 </html>
