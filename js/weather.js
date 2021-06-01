@@ -13,7 +13,8 @@ const weather = document.querySelector(".js-weather"),
       nowDate = new Date(),
       Tbody = document.querySelector("#jsTbody"),
       calendarContainerBox = document.querySelector("#calendarBox"),
-      jsCalenderTitle = document.querySelector("#jsCalenderTitle");
+      jsCalenderTitle = document.querySelector("#jsCalenderTitle"),
+      blackBack = document.querySelector("#blackBack");
 
 
 let weatherChk = 0,
@@ -198,7 +199,9 @@ function checktd(firstDay,nowMonth)  {
         if(tdList[0].name === firstDay) {
             tdList[0].innerText = `${countDays}`;
             tdList[0].style.color = "white";
+            tdList[0].style.background = "skyblue";
             days = true;
+
         } else  {
             let prevDate = prevMonthLastDate.getDate()+1;
             prevDate = prevDate - (firstDay - tdList[0].name);
@@ -229,6 +232,8 @@ function prevMonthCalendar()    {
         countDays = 1,
         nextDate = 1;
 
+        selectMonth.selectedIndex = nowMonth;
+
         addCalendar();
     }
 }
@@ -242,6 +247,8 @@ function nextMonthCalendar()    {
         days = false,
         countDays = 1,
         nextDate = 1;
+
+        selectMonth.selectedIndex = nowMonth;
 
         addCalendar();
     }
@@ -264,39 +271,73 @@ function selectMonthCalendar()  {
 function handlecalendarBtn()    {
     if(calendarToggle === false)    {
         calendarBtn.className = "calendarOn";
-        tableBox.className = "tableBoxOn"
+        tableBox.style.display="block";
         calendarToggle = true;
-
+        setTimeout(() => {
+            tableBox.className = "tableBoxOn"
+        }, 100);
     } else  {
-        calendarBtn.className = "";
-        tableBox.className = ""
-        calendarToggle = false;
+        calendarContainerBox.style.display ="none";
+    blackBack.style.display = "none"
+    tableBox.style.display="none";
+    blackBack.className = "";
+    calendarContainerBox.className = "";
+
+    calendarBtn.className = "";
+    tableBox.className = ""
+    calendarToggle = false;
     }
 }
-
+tableBox.style.display="none";
+blackBack.style.display = "none"
+calendarContainerBox.style.display ="none";
 function handleTdCalender(event) {
+    calendarContainerBox.style.display ="block";
+    blackBack.style.display = "block";
     calendarContainerBox.className = "";
-    toDoList.innerHTML = "";
-    toDoEndList.innerHTML = "";
+    toDos= [];
 
     const checkTd = event.target;
     
     let checkMonth = selectMonth.selectedIndex+1;
 
-    console.log(checkTd,checkMonth);
+    for(i=1; i <= 42; i++)   {
+        let tdBackground = document.querySelector(`.td${i}`);
+        tdBackground.style.background = "";
+    }
+
+    checkTd.style.background = "pink";
 
     TODOS_LS = `${nowyers}-${checkMonth}-${checkTd.innerText}`;
+    newId = 0;
     
-    loadToDos();
+    loadToDos(nowyers,checkMonth,checkTd.innerText);
 
     setTimeout(() => {
+        blackBack.className = "blackBack";
+    }, 200)
+
+    setTimeout(() => {
+        tableBox.className = "tableBoxOn"
         calendarContainerBox.className = "calenderBoxOn";
     }, 300);
 
-    console.dir(jsCalenderTitle);
-    console.log(`${nowyers}-${checkMonth}-${checkTd.innerText}`);
-
     jsCalenderTitle.innerText = `${nowyers}-${checkMonth}-${checkTd.innerText}`;
+
+    blackBack.addEventListener("click",reMoveCalender);
+
+}
+
+function reMoveCalender()   {
+    tableBox.style.display="none";
+    calendarContainerBox.style.display ="none";
+    blackBack.style.display = "none"
+    blackBack.className = "";
+    calendarContainerBox.className = "";
+
+    calendarBtn.className = "";
+    tableBox.className = ""
+    calendarToggle = false;
 }
 
 selectMonth.addEventListener("change",selectMonthCalendar);
