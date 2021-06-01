@@ -17,16 +17,31 @@ li  {
 .form,.greetings {
 	display:none;
   }
+.form .js-input  {
+  width: 200px;
+    text-align: center;
+    background: no-repeat;
+    border: 0px;
+    border-bottom: 2px solid white;
+    padding: 10px;
+    font-weight: bold;
+    font-size: 20px;
+    color: white;
+    text-shadow: 1px 1px azure;
+    margin: 0 auto;
+    display: block;
+    margin-bottom: 30px;
+}
 
 .js-toDoForm input  {
   background: rgba(0,0,0,0.2);
     border: 0px;
-    border-bottom: 3px solid white;
     font-size: 2vh;
     padding: 8px;
     color: white;
     text-shadow: 0 0 5px black;
     border-radius: 10px;
+    margin-bottom: 10px;
 }
 .js-toDoForm input::placeholder {
   color:white;
@@ -86,7 +101,7 @@ li  {
 }
 
 .bgImage  {
-  position: absolute;
+  position: fixed;
     top: 0px;
     left: 0px;
     width: 100%;
@@ -156,6 +171,11 @@ li  {
     transition:all 0.3s ease-in-out;
     cursor:default;
 }
+#jsTbody td {
+  border-radius: 50%;
+    padding: 1px 3px;
+    transition: all 0.3s;
+}
 
 #tableBox td:hover  {
   background-color:slategrey;
@@ -207,11 +227,7 @@ li  {
   position: absolute;
   top: -110px;
   left: -110px;
-  background: #aa4b6b;  /* fallback for old browsers */
-background: -webkit-linear-gradient(to right, #3b8d99, #6b6b83, #aa4b6b);  /* Chrome 10-25, Safari 5.1-6 */
-background: linear-gradient(to right, #3b8d99, #6b6b83, #aa4b6b); /* W3C, IE 10+/ Edge, Firefox 16+, Chrome 26+, Opera 12+, Safari 7+ */
-
-
+  background: dimgray;
   border-radius: 50%;
   box-shadow: 0px 0px 0px rgb(0 0 0 / 80%);
   transition:all 0.3s ease-in-out;
@@ -232,7 +248,7 @@ background: linear-gradient(to right, #3b8d99, #6b6b83, #aa4b6b); /* W3C, IE 10+
 }
 
 .calendarOn {
-  width: 300px !important;
+  width: 320px !important;
   left: 0px !important;
     top: 0px !important;
     border-radius: 0px 10px 10px 0px !important;
@@ -255,25 +271,60 @@ background: linear-gradient(to right, #3b8d99, #6b6b83, #aa4b6b); /* W3C, IE 10+
 
 #calendarBox  {
   width: 30%;
-    height: 60vh;
+    height: 71vh;
     position: fixed;
     left: 35%;
     top: 23%;
-    background: rgba(255,255,255,1);
+    background: dimgray;
     text-align: center;
     border-radius: 30px;
     opacity: 0;
-    transition:all 0.3s;
+    transition:all 0.1s;
+}
+
+#ulTitle  {
+  display: flex;
+    justify-content: center;
+    position: relative;
+    width: 95%;
+    margin: 0 auto;
+    border-radius: 30px;
+}
+
+#ulTitle div  {
+  width: 44%;
+    padding: 5px 0px;
+    margin: 1% 1.6%;
+    background: rgba(0,0,0,0.5);
+    color: white;
+    border-radius: 20px 20px 0 0;
+    margin-bottom: 0px;
 }
 
 .calenderBoxOn  {
+  transition:all 0.3s;
   opacity: 1 !important;
   top:20% !important;
 }
 
+#calenderText {
+  font-size: 1vw;
+    position: absolute;
+    left:10px;
+    bottom: 10px;
+    opacity: 0;
+}
+
+.calendarOn #calenderText {
+  opacity: 1;
+}
+
 #calendarBox p  {
   font-size: 2vw;
-    margin: 20px;
+    font-weight: bold;
+    margin: 14px;
+    text-shadow: 0 0 4px crimson;
+    color: white;
 }
 #calendarBox hr {
   height: 2px;
@@ -302,9 +353,46 @@ background: linear-gradient(to right, #3b8d99, #6b6b83, #aa4b6b); /* W3C, IE 10+
   border-radius: 20px;
 }
 
+.reName {
+  margin: 0 auto;
+    text-align: center;
+    display: block;
+    padding: 4px 15px;
+    background: rgba(0,0,0,0.6);
+    border: 2px solid white;
+    color: white;
+    cursor: pointer;
+    transition: all 0.3s;
+}
+.reName:hover {
+  transform: scale(1.05);
+}
+.reName:active  {
+  transform: scale(0.95);
+}
+
+.blackBack  {
+  position: fixed;
+  top: 0px;
+  left: 0px;;
+  width: 100%;
+  height: 100%;
+  background: rgba(0,0,0,0.6);
+    transition: all 0.3s;
+}
+
 @media screen and (max-width: 768px) {
   .js-weather {
     display: block;
+  }
+  .js-title {
+    font-size: 15vw;
+    margin-top: 5%;
+    margin-bottom: 1%;
+  }
+  .showing  {
+    font-size: 7vw;
+    margin: 2%;
   }
 
   .calendarOn {
@@ -312,9 +400,28 @@ background: linear-gradient(to right, #3b8d99, #6b6b83, #aa4b6b); /* W3C, IE 10+
     height: 52vh !important;
   }
   .tableBoxOn{
-    left: 28% !important;
+    left: 24% !important;
   }
   #jsMonth select {
     font-size: 4vw;
+  }
+  #calendarBox  {
+    width: 95%;
+    left: 2.5%;
+    top: unset !important;
+    bottom: 2.5% !important;
+    z-index: 2;
+    border: 3px solid white;
+    box-sizing: border-box;
+  }
+  #calenderText {
+    font-size: 4vw;
+  }
+  #calendarBox p  {
+    font-size: 8vw;
+  }
+  #ulTitle div  {
+    width: 42%;
+    margin: 0% 1.6%;
   }
 }
