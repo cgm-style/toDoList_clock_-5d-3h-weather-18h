@@ -255,7 +255,7 @@ function nextMonthCalendar()    {
 }
 
 function selectMonthCalendar()  {
-    let selectMonthValue = selectMonth.selectedIndex+1;
+    let selectMonthValue = selectMonth.selectedIndex;
     nowMonth = selectMonthValue;
 
     date = new Date(nowyers,nowMonth,nowDays);
