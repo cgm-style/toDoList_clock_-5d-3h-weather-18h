@@ -80,7 +80,7 @@ function paintToDo(text,clear)	{	// 텍스트,클리어여부,id값을 받아옴
 
 	span.innerText = text;	// span의 text 내용 
 	li.id = newId;	// li에 id 값 생성
-	delBtn.className = "delBtn";	// 삭제 버튼에 class 생성
+	delBtn.Name = "delBtn";	// 삭제 버튼에 class 생성
 	clearBtn.className = "clearBtn";	// 체크 버튼에 class 생성
 
 	if(clear === false)	{	// clear가 아니라면
