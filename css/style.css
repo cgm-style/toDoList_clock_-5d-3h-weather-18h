@@ -10,7 +10,8 @@ li  {
     color: white;
     text-shadow: 0 0 10px black;
     font-size: 4vw;
-    margin-top: 10%;
+    margin-top: 1%;
+    margin-bottom: 1%;
     z-index: 1;
 }
 
@@ -114,6 +115,7 @@ li  {
   display: flex;
   justify-content: center;
   animation:all 1s linear;
+  flex-wrap: wrap;
 }
 
 .js-weather div {
@@ -195,6 +197,7 @@ li  {
     margin: 0px 0px 15px 0px;
     position: relative;
     display: flex;
+    flex-wrap: wrap;
     padding: 5px;
     background: rgba(255,255,255,0.15);
     border-radius: 5px;
@@ -271,7 +274,7 @@ li  {
 
 #calendarBox  {
   width: 30%;
-    height: 71vh;
+    height: 600px;
     position: fixed;
     left: 35%;
     top: 23%;
@@ -284,6 +287,7 @@ li  {
 
 #ulTitle  {
   display: flex;
+  flex-wrap: wrap;
     justify-content: center;
     position: relative;
     width: 95%;
@@ -336,6 +340,7 @@ li  {
 
 #jsTodoBox  {
   display: flex;
+  flex-wrap: wrap;
   justify-content: center;
   position: relative;
   width: 95%;
@@ -381,6 +386,186 @@ li  {
     transition: all 0.3s;
 }
 
+#search {
+  margin: 0 auto;
+  width: 40px;
+  height: 40px;
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  overflow: hidden;
+  border: 4px solid white;
+  padding: 5px;
+  border-radius: 50%;
+  box-shadow: 1px 1px 4px black, inset 1px 1px 2px black;
+  margin-top: 90px;
+  cursor: pointer;
+  transition: all 0.3s ease-in-out;
+}
+
+#search.searchOn {
+  width: 450px ;
+  border-radius: 40px ;
+  padding: 5px 25px ;
+  padding-left: 10px ;
+}
+
+#search:hover {
+  transform: scale(1.05);
+}
+
+#search:active {
+  transform: scale(0.95);
+}
+
+#search i  {
+  width: 50px;
+  height: 50px;
+  font-size: 30px;
+  padding-top: 5px;
+  padding-left: 15px;
+  padding-right: 10px;
+  color: white;
+  text-shadow: 1px 1px 2px black;
+  transition: all 0.5s;
+}
+
+#search.searchOn i {
+  padding-left: 0px;
+}
+
+
+#search input {
+  width: 100%;
+  border: 0px;
+  border-bottom: 3px solid white;
+  background: no-repeat;
+  box-shadow: 0px 1px 0px black;
+  padding: 2px;
+  color: white;
+  font-size: 3vh;
+  text-shadow: 1px 1px 2px black;
+}
+
+#favorites  {
+  width: 50%;
+  margin: 0 auto;
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  background: rgba(0,0,0,0.3);
+  padding: 10px 25px;
+  border-radius: 10px;
+}
+
+.aLink  {
+  text-align: center;
+  width: 120px;
+  padding: 15px 0px;
+  border-radius: 10px;
+  transition: all 0.2s;
+  cursor: pointer;
+  position: relative;
+  text-decoration: none;
+}
+
+.aLink:hover  {background: rgba(0,0,0,0.5);}
+
+.favoritesIcon  {
+  margin: 0 auto;
+  background: lightgray;
+  border-radius: 50%;
+  padding: 20px;
+  width: 20px;
+  height: 20px;
+}
+.favoritesIcon i {
+  display: block;
+    width: 20px;
+    height: 20px;
+    background-size: 100% !important;
+}
+
+.removeFavorites  {
+  position: absolute;
+  top: 7px;
+  right: 7px;
+  color: crimson;
+  opacity: 0;
+  transition: all 0.2s;
+}
+
+.removeFavorites:hover {
+  transform: scale(1.5);
+}
+
+.aLink:hover .removeFavorites {
+  opacity: 1;
+}
+
+.favoritesText  {
+  color: white;
+  margin-bottom: 0px;
+}
+
+#formFavorites  {
+  position: fixed;
+  width: 30%;
+  left: 35%;
+  height: auto;
+  background: antiquewhite;
+  border: 5px solid slategrey;
+  padding: 25px;
+  box-sizing: border-box;
+  border-radius: 30px;
+  text-align: center;
+  display: none;
+  z-index: 2;
+}
+
+#formFavorites p  {
+  margin-bottom: 8px;
+  margin-top: 0px;
+}
+
+#favoritesName  {
+  width: 70%;
+  font-size: 20px;
+  margin-bottom: 20px;
+  background: no-repeat;
+  border: none;
+  border-bottom: 2px solid;
+}
+
+#favoritesUrl {
+  width: 70%;
+  font-size: 20px;
+  margin-bottom: 20px;
+  background: no-repeat;
+  border: none;
+  border-bottom: 2px solid;
+}
+
+#addFavoritesBtn {
+  position: relative;
+  display: block;
+  text-align: center;
+  margin: 0 auto;
+  border: 0px;
+  padding: 10px 20px;
+  background: rgba(0,0,0,0.1);
+  border-radius: 10px;
+  box-shadow: 1px 1px 1px;
+  transition: all 0.2s;
+}
+
+#addFavoritesBtn:hover  {
+  transform: scale(1.02);
+}
+#addFavoritesBtn:active {
+  transform: scale(0.97);
+}
+
 @media screen and (max-width: 768px) {
   .js-weather {
     display: block;
@@ -397,16 +582,21 @@ li  {
 
   .calendarOn {
     width: 100% !important;
-    height: 52vh !important;
+    height: 100vh !important;
+  }
+  #jsTable  {
+    width: 100%;
   }
   .tableBoxOn{
-    left: 24% !important;
+    left: 5% !important;
+    width: 80%;
   }
   #jsMonth select {
     font-size: 4vw;
   }
   #calendarBox  {
     width: 95%;
+    height: 85vh;
     left: 2.5%;
     top: unset !important;
     bottom: 2.5% !important;
@@ -414,6 +604,14 @@ li  {
     border: 3px solid white;
     box-sizing: border-box;
   }
+  #jsTodoBox  {
+    height: 55vh;
+  }
+
+  .js-toDoForm input  {
+    width: 80%;
+  }
+
   #calenderText {
     font-size: 4vw;
   }
@@ -421,7 +619,64 @@ li  {
     font-size: 8vw;
   }
   #ulTitle div  {
-    width: 42%;
-    margin: 0% 1.6%;
+    width: 39%;
+    margin: 0% 3%;
+  }
+
+  #search.searchOn  {
+    width: 80%;
+    padding: 3px 25px;
+  }
+  #search input {
+    height: 27px;
+  }
+
+  #favorites  {
+    width: 84%;
+  }
+
+  .aLink  {
+    padding: 5px;
+    width: 33%;
+    box-sizing: border-box;
+  }
+
+  .favoritesIcon  {
+    width: 14px;
+    height: 14px;
+    padding: 10px;
+  }
+
+  .favoritesIcon i  {
+    width: 14px;
+    height: 14px;
+    font-size: 14px;
+  }
+  .favoritesText  {
+    font-size: 12px;
+  }
+
+  #formFavorites  {
+    width: 90%;
+    left: 5%;
+  }
+
+  .removeFavorites  {
+    opacity: 1 !important;
+    top: -5px;
+    transform: scale(1.5) !important;
+    right: 15px;
+  }
+
+  #search i {
+    width: 40px;
+  }
+
+  #search.searchOn i {
+    padding-right: 0px !important;
+  }
+
+  #searcForm  {
+    width:80%;
   }
 }
