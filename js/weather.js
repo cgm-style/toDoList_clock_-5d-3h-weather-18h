@@ -199,8 +199,10 @@ function checktd(firstDay,nowMonth)  {
         if(tdList[0].name === firstDay) {
             tdList[0].innerText = `${countDays}`;
             tdList[0].style.color = "white";
-            tdList[0].style.background = "skyblue";
             days = true;
+            if(countDays === nowDays)   {
+                tdList[0].style.background = "skyblue";
+            }
 
         } else  {
             let prevDate = prevMonthLastDate.getDate()+1;
@@ -213,6 +215,9 @@ function checktd(firstDay,nowMonth)  {
             countDays = countDays + 1;
             tdList[0].innerText = `${countDays}`;
             tdList[0].style.color = "white";
+            if(countDays === nowDays)   {
+                tdList[0].style.background = "skyblue";
+            }
             return false;
         }else  {
             tdList[0].innerText = `${nextDate}`;
@@ -323,15 +328,13 @@ function handleTdCalender(event) {
     }, 300);
 
     jsCalenderTitle.innerText = `${nowyers}-${checkMonth}-${checkTd.innerText}`;
-
-    blackBack.addEventListener("click",reMoveCalender);
-
 }
 
 function reMoveCalender()   {
     tableBox.style.display="none";
     calendarContainerBox.style.display ="none";
-    blackBack.style.display = "none"
+    blackBack.style.display = "none";
+    favoritesform.style.display = "none";
     blackBack.className = "";
     calendarContainerBox.className = "";
 
@@ -344,6 +347,7 @@ selectMonth.addEventListener("change",selectMonthCalendar);
 prevBtn.addEventListener("click",prevMonthCalendar);
 nextBtn.addEventListener("click",nextMonthCalendar);
 calendarBtn.addEventListener("click",handlecalendarBtn);
+blackBack.addEventListener("click",reMoveCalender);
 
 function init() {
     loadCoords();
