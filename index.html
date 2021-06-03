@@ -9,8 +9,23 @@
   </head>
   <body>
     <div id="blackBack"></div>
+    <div id="search"><i class="fas fa-search"></i><form id="searcForm"><input type="text"></form></div>
     <div class="js-clock">
       <h1 class="js-title"></h1>
+    </div>
+    
+    <div id="favorites">
+      <form id="formFavorites">
+        <p>이름</p>
+        <input id="favoritesName" type="text" required>
+        <p>URL</p>
+        <input id="favoritesUrl" type="textarea" required>
+        <input id="addFavoritesBtn" type="submit" value="추가하기">
+      </form>
+      <div id="addFavorites" class="aLink">
+        <div class="favoritesIcon"><i class="fas fa-plus"></i></div>
+        <p class="favoritesText">바로가기 추가</p>
+      </div>
     </div>
     <form class="js-form form">
       <input class="js-input" type="text" placeholder="what is your name">
@@ -82,12 +97,13 @@
     </div>
   </div>
 
-
     <script src="https://use.fontawesome.com/254c48192f.js"></script>
     <script src="js/bg.js"></script>
     <script src="js/clock.js"></script>
     <script src="js/script.js"></script>
 	  <script src="js/todo.js"></script>
 	  <script src="js/weather.js"></script>
+    <script src="js/search.js"></script>
+    <script src="js/favorites.js"></script>
   </body>
 </html>
